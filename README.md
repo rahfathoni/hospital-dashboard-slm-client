@@ -1,8 +1,13 @@
-# hospital-dashboard-client
+# Hospital-Dashboard-Client
 
-This template should help get you started developing with Vue 3 in Vite.
+## Run on Local
+    1. in terminal or git bash, git clone https://github.com/rahfathoni/hospital-dashboard-slm-client.git
+    2. in terminal, npm install
+    3. in terminal, npm run dev
 
 ## Recommended IDE Setup
+
+This template should help get you started developing with Vue 3 in Vite.
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
