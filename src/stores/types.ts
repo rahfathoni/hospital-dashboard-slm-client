@@ -5,3 +5,8 @@ export interface Hospital {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface HospitalFetchList {
+  status: string;
+  result: Hospital[];
+}
