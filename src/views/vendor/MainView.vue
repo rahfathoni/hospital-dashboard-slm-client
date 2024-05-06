@@ -4,7 +4,7 @@
 <template>
   <main>
     <h1>
-      Dashboard page on development
+      Vendor / main page on development
     </h1>
   </main>
 </template>
