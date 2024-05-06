@@ -23,3 +23,14 @@ export interface VendorFetchList {
   status: string;
   result: Vendor[];
 }
+
+export interface VendorAdd {
+  name: string;
+  address: string;
+  relatedHospital: string;
+}
+
+export interface VendorAddResponse {
+  status: string;
+  result: Vendor[];
+}

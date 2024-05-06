@@ -1,10 +1,92 @@
 <script setup lang="ts">
+  import { useHospitalStore } from '@/stores/hospital';
+  import { useVendorStore } from '@/stores/vendor';
+  import { storeToRefs } from 'pinia';
+  import { useField, useForm } from 'vee-validate';
+  
+  const hospitalStore = useHospitalStore();
+  const vendorStore = useVendorStore();
+  const { data } = storeToRefs(hospitalStore);
+  const { addVendor } = vendorStore;
+
+  const { handleSubmit, handleReset } = useForm({
+    validationSchema: {
+      name (value: string) {
+        if (value?.length >= 2) return true
+        return 'Name needs to be at least 2 characters.'
+      },
+      address (value: string) {
+        if (value?.length >= 2) return true
+        return 'Address needs to be at least 2 characters.'
+      },
+      select (value: any) {
+        if (value?.length > 0) return true
+        return 'Select minimum 1 hospital.'
+      },
+    },
+  })
+  const name = useField('name');
+  const address = useField('address');
+  const select = useField('select');
+
+  const submit = handleSubmit( async (values) => {
+    try {
+      const input = {
+        name: values.name,
+        address: values.address,
+        relatedHospital: values?.select.join(',')
+      }
+      const response: any = await addVendor(input);
+      console.log('cek berhasil ', response);
+      if (response.status === 'success') {
+        handleReset();
+      }
+    } catch(error) {
+      console.log('[ERROR] submit', error);
+    }
+  })
 </script>
 
 <template>
   <main>
-    <h1>
-      Vendor / add page on development
-    </h1>
+    <section class="d-flex align-center py-3">
+      <h1 class="font-weight-medium">
+        Add New Vendor
+      </h1>
+    </section>
+    <form @submit.prevent="submit">
+      <v-text-field
+        v-model="name.value.value"
+        :error-messages="name.errorMessage.value"
+        label="Name"
+      ></v-text-field>
+
+      <v-text-field
+        v-model="address.value.value"
+        :error-messages="address.errorMessage.value"
+        label="Address"
+      ></v-text-field>
+
+      <v-select
+        v-model="select.value.value"
+        :error-messages="select.errorMessage.value"
+        :items="data"
+        item-value="id"
+        item-title="name"
+        label="Select"
+        multiple
+      ></v-select>
+
+      <v-btn
+        class="me-4"
+        type="submit"
+      >
+        submit
+      </v-btn>
+
+      <v-btn @click="handleReset">
+        clear
+      </v-btn>
+    </form>
   </main>
 </template>
