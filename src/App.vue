@@ -1,30 +1,19 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-
-// test vuetify
-import { useDate } from 'vuetify'
-const date = useDate()
-const formatted = date.format('2010-04-14', 'fullDateWithWeekday')
-console.log(formatted) // Tuesday, April 14, 2010
+// import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
 
     <div class="wrapper">
-      <!-- test vuetify -->
-      <v-btn prepend-icon="$vuetify">
-        Button
-      </v-btn>
-      <!--  -->
-      <HelloWorld msg="You did it!" />
+      <!-- <HelloWorld msg="You did it!" /> -->
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Dashboard</RouterLink>
+        <RouterLink to="/vendor">Vendor</RouterLink>
       </nav>
     </div>
   </header>
