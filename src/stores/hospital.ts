@@ -4,6 +4,7 @@ import type { Hospital as IHospital } from './types';
 
 export const useHospitalStore = defineStore('hospital', () => {
   const data = ref<IHospital[]>([]);
+  const testing = ref('test') 
 
-  return { data };
+  return { data, testing };
 });
