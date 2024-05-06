@@ -2,22 +2,27 @@
   import { watch } from 'vue';
   import { onMounted } from 'vue';
   import { useHospitalStore } from '@/stores/hospital';
+  import { useVendorStore } from '@/stores/vendor';
   import { storeToRefs } from 'pinia';
 
   const hospitalStore = useHospitalStore();
   const { selectedHospital } = storeToRefs(hospitalStore);
-
+  const vendorStore = useVendorStore();
+  const { data } = storeToRefs(vendorStore);
+  const { fetchAllVendorList, fetchVendorByHospital } = vendorStore;
+  
   onMounted(async () => {
-    // await fetchHospitalList();
+    if (selectedHospital) {
+      hospitalStore.$patch({ selectedHospital: null });
+    }
+    await fetchAllVendorList();
   });
   watch(selectedHospital, async (newValue) => {
-    console.log('newvalue', newValue)
     if (newValue) {
-      // await fetchHospitalData(newValue);
-      console.log('masuk nilai baru')
+      await fetchVendorByHospital(newValue);
       return;
     }
-    console.log('lolos kosong')
+    await fetchAllVendorList();
   });
 </script>
 
@@ -25,6 +30,7 @@
   <main>
     <h1>
       Vendor / main page on development {{ selectedHospital }}
+      {{ data }}
     </h1>
   </main>
 </template>

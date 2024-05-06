@@ -18,7 +18,7 @@ export const useHospitalStore = defineStore('hospital', () => {
       }
     } catch (error) {
       data.value = [];
-      console.error('Error fetching data:', error);
+      console.error('[ERR] fetchHospitalList', error);
     }
   };
 

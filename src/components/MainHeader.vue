@@ -34,6 +34,7 @@
       <v-spacer></v-spacer>
 
       <v-select
+        v-if="route.name === 'vendor'"
         name="selectHospital"
         label="Select"
         :items="data"
