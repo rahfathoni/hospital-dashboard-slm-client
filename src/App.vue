@@ -10,8 +10,8 @@ import MainSideNav from './components/MainSideNav.vue';
   <v-layout class="rounded rounded-md">
     <MainSideNav />
     <MainHeader class="pt-3" />
-    <v-main class=" h-screen" style="background-color: blue">
-      <RouterView class="px-2 pt-5" style="background-color: green;"/>
+    <v-main class="h-screen bg-ghost-white">
+      <RouterView class="px-2 pt-5 bg-ghost-white"/>
     </v-main>
   </v-layout>
 </template>
