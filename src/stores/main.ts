@@ -18,7 +18,7 @@ export const useMainStore = defineStore('main', () => {
       showNavBar.value = false;
       return response.data;
     } catch (error) {
-      console.error('[ERR] loginUser', error);
+      console.log('[ERR] loginUser', error);
       throw error;
     }
   }
