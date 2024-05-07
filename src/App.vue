@@ -8,8 +8,10 @@ const route = useRoute();
 
 <template>
   <v-layout class="rounded rounded-md">
-    <MainSideNav v-if="route.name !== 'login'" />
-    <MainHeader v-if="route.name !== 'login'" class="pt-3" />
+    <section v-if="route.name !== 'login'">
+      <MainSideNav />
+      <MainHeader class="pt-3" />
+    </section>
     <v-main class="h-screen bg-ghost-white">
       <RouterView class="px-2 pt-5 bg-ghost-white"/>
     </v-main>
