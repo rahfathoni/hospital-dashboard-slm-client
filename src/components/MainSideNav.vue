@@ -22,5 +22,16 @@
         </v-list-item-title>
       </v-list-item>
     </v-list>
+    <template v-slot:append>
+      <div class="pa-2">
+        <v-btn 
+          block
+          color="primary"
+          to="/login"
+        >
+          Logout
+        </v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>

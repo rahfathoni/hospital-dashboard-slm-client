@@ -31,9 +31,21 @@ const vuetify = createVuetify({
 })
 const pinia = createPinia()
 
+import { useMainStore } from './stores/main'
+
+
 app.use(router)
 app.use(vuetify)
 app.use(pinia)
 pinia.use(piniaPluginPersistedstate)
 
 app.mount('#app')
+
+const mainStore = useMainStore();
+const loggedInUser = localStorage.getItem('user');
+if (loggedInUser) {
+  const userObject = JSON.parse(loggedInUser);
+  if (userObject && userObject.username) {
+    mainStore.$patch({ user: userObject });
+  }
+}

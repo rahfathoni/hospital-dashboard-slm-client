@@ -22,7 +22,7 @@
     let title = newValue;
     if (newValue === 'dashboard') title = 'Dashboard';
     if (newValue === 'vendor') title = 'Vendor';
-    if (newValue === 'addVendor') title = 'Add Vendor';
+    if (newValue === 'addVendor') title = 'Add New Vendor';
     currentPageName.value = title;
   });
 </script>
