@@ -4,7 +4,7 @@ import type { UserLogin, UserLoginResponse } from './types'
 import server from '@/api';
 
 export const useMainStore = defineStore('main', () => {
-  const showNavBar = ref(false);
+  const showNavBar = ref(true);
   const user = ref({
     username: '' as string
   });
@@ -15,7 +15,7 @@ export const useMainStore = defineStore('main', () => {
       const response = await server.post<UserLoginResponse>('/users/login', input);
       console.log('[RES] loginUser', response.data);
       localStorage.setItem('user', JSON.stringify({ username: response.data.results.username }));
-      showNavBar.value = false;
+      showNavBar.value = true;
       return response.data;
     } catch (error) {
       console.log('[ERR] loginUser', error);
