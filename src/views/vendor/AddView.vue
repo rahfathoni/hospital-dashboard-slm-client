@@ -3,11 +3,13 @@
   import { useVendorStore } from '@/stores/vendor';
   import { storeToRefs } from 'pinia';
   import { useField, useForm } from 'vee-validate';
+  import { useRouter } from 'vue-router';
   
   const hospitalStore = useHospitalStore();
   const vendorStore = useVendorStore();
   const { data } = storeToRefs(hospitalStore);
   const { addVendor } = vendorStore;
+  const router = useRouter();
 
   const { handleSubmit, handleReset } = useForm({
     validationSchema: {
@@ -37,11 +39,13 @@
         relatedHospital: values?.select.join(',')
       }
       const response: any = await addVendor(input);
-      console.log('cek berhasil ', response);
       if (response.status === 'success') {
         handleReset();
+        router.push({ path: '/vendor' });
+        // TODO: add success notification/snackbar
       }
     } catch(error) {
+      // TODO: add error notification/snackbar
       console.log('[ERROR] submit', error);
     }
   })
@@ -68,7 +72,7 @@
       ></v-text-field>
 
       <v-select
-        v-model="select.value.value"
+        v-model="select.value.value as string[]"
         :error-messages="select.errorMessage.value"
         :items="data"
         item-value="id"

@@ -34,3 +34,16 @@ export interface VendorAddResponse {
   status: string;
   result: Vendor[];
 }
+
+export interface UserLogin {
+  username: string;
+  password: string;
+}
+
+export interface UserLoginResponse {
+  status: string;
+  results: {
+    message: string;
+    username: string;
+  };
+}

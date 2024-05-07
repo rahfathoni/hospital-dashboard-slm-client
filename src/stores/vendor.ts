@@ -36,9 +36,6 @@ export const useVendorStore = defineStore('vendor', () => {
   const addVendor = async (input: VendorAdd) => {
     try {
       console.log('[REQ] addVendor', input);
-      // return {
-        
-      // }
       const response = await server.post<VendorAdd>('/vendors', input);
       console.log('[RES] addVendor', response.data)
       return response.data;

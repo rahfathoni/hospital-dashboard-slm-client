@@ -4,7 +4,10 @@
 <template>
   <main>
     <h1>
-      Dashboard page on development
+      Welcome to Hospital Dashboard.
     </h1>
+    <h3>
+      Dashboard page on development. Please go to other page via Side Bar
+    </h3>
   </main>
 </template>

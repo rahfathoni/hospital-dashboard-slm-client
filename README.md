@@ -5,6 +5,10 @@
     2. in terminal, npm install
     3. in terminal, npm run dev
 
+## Login in Development
+    username: "admin"
+    password: "admin"
+
 ## Recommended IDE Setup
 
 This template should help get you started developing with Vue 3 in Vite.
