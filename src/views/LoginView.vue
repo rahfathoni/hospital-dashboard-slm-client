@@ -1,8 +1,9 @@
 <script setup lang="ts">
-  import { onBeforeMount, ref } from 'vue';
+  import { onBeforeMount, ref, reactive} from 'vue';
   import { useField, useForm } from 'vee-validate';
   import { useMainStore } from '@/stores/main';
   import { useRouter } from 'vue-router';
+  import NotificationPopup from '@/components/NotificationPopup.vue';
 
   const router = useRouter();
   const mainStore = useMainStore();
@@ -16,6 +17,12 @@
   });
   
   const isPasswordShow = ref(false);
+  const snackbar = reactive({
+    show: false,
+    text: '',
+    color: '',
+    timeout: 3000
+  });
     
   const { handleSubmit } = useForm({
     validationSchema: {
@@ -41,14 +48,22 @@
       const response: any = await loginUser(input);
       if (response.status === 'success') {
         router.push({ path: '/vendor' });
-        // TODO: add success notification/snackbar
       }
-    } catch(error) {
-      // TODO: add error notification
+    } catch(error: any) {
+      if (error.response.status === 400) {
+        snackbar.text = "Invalid username/password. HINT: try username-password example";
+        snackbar.color = "warning";
+      } else {
+        snackbar.text = "Error. Plase try again later";
+        snackbar.color = "danger";
+      }
+      snackbar.show = true;
       console.error('[ERROR] login', error);
     }
   })
-
+  const closePopup = (val: boolean) => {
+    snackbar.show = val;
+  }
 </script>
 
 <template>
@@ -95,5 +110,13 @@
         </form>
       </v-card-text>
     </v-card>
+
+    <NotificationPopup
+      v-model="snackbar.show"
+      :text="snackbar.text"
+      :color="snackbar.color"
+      :timeout="snackbar.timeout"
+      @closeShow="closePopup"
+    />
   </main>
 </template>

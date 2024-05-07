@@ -4,6 +4,8 @@
   import { storeToRefs } from 'pinia';
   import { useField, useForm } from 'vee-validate';
   import { useRouter } from 'vue-router';
+  import { reactive } from 'vue';
+  import NotificationPopup from '@/components/NotificationPopup.vue';
   
   const hospitalStore = useHospitalStore();
   const vendorStore = useVendorStore();
@@ -30,6 +32,12 @@
   const name = useField('name');
   const address = useField('address');
   const select = useField('select');
+  const snackbar = reactive({
+    show: false,
+    text: '',
+    color: '',
+    timeout: 3000
+  });
 
   const submit = handleSubmit( async (values) => {
     try {
@@ -42,20 +50,24 @@
       if (response.status === 'success') {
         handleReset();
         router.push({ path: '/vendor' });
-        // TODO: add success notification/snackbar
       }
     } catch(error) {
-      // TODO: add error notification/snackbar
+      snackbar.text = "Error. Plase try again later.";
+      snackbar.color = "danger";
+      snackbar.show = true;
       console.log('[ERROR] submit', error);
     }
-  })
+  });
+  const closePopup = (val: boolean) => {
+    snackbar.show = val;
+  }
 </script>
 
 <template>
   <main>
     <section class="d-flex align-center py-3">
       <h1 class="font-weight-medium">
-        Add New Vendor
+        Add New Vendor Form
       </h1>
     </section>
     <form @submit.prevent="submit">
@@ -92,5 +104,13 @@
         clear
       </v-btn>
     </form>
+
+    <NotificationPopup
+      v-model="snackbar.show"
+      :text="snackbar.text"
+      :color="snackbar.color"
+      :timeout="snackbar.timeout"
+      @closeShow="closePopup"
+    />
   </main>
 </template>
