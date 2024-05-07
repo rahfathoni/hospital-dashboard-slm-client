@@ -1,9 +1,10 @@
 # Hospital-Dashboard-Client
 
 ## Run on Local
-    1. in terminal or git bash, git clone https://github.com/rahfathoni/hospital-dashboard-slm-client.git
-    2. in terminal, npm install
-    3. in terminal, npm run dev
+    1. In terminal or git bash, git clone https://github.com/rahfathoni/hospital-dashboard-slm-client.git
+    2. In terminal, npm install
+    3. In terminal, npm run dev
+    4. Don't forget to run the development server locally, repository https://github.com/rahfathoni/hospital-dashboard-slm-server 
 
 ## Login in Development
     username: "admin"
